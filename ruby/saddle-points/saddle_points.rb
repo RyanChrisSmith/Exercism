@@ -1,24 +1,23 @@
 class Matrix
-  def initialize(string)
-    @rows = string.lines.map { |line| line.split.map(&:to_i) }
+  # define accessors for `rows` and `columns` instance variables
+  attr_reader :rows, :columns
+
+  def initialize(matrix_str)
+    # split the matrix string by newlines and map each row to an array of integers
+    @rows = matrix_str.split("\n").map { |row| row.split.map(&:to_i) }
+    # transpose the matrix to get the columns
     @columns = @rows.transpose
   end
 
-  def rows
-    @rows
-  end
-
-  def columns
-    @columns
-  end
-
   def saddle_points
-    saddle_points = []
-    @rows.each_with_index do |row, row_index|
-      row.each_with_index do |value, col_index|
-        saddle_points << [col_index, row_index] if value == @rows[row_index].min && value == @columns[col_index].max
-      end
+    # iterate over each row with its index
+    rows.each_with_index.flat_map do |row, row_index|
+      # iterate over each element in the row with its index
+      row.each_with_index.select do |elem, col_index|
+        # check if the element is both the maximum in its row and the minimum in its column
+        elem == row.max && elem == columns[col_index].min
+      end.map { |_, col_index| [row_index, col_index] }
     end
-    saddle_points
   end
 end
+

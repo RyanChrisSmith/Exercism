@@ -50,7 +50,7 @@ class MatrixTest < Minitest::Test
   end
 
   def test_another_saddle_point
-    skip
+    # skip
     matrix = Matrix.new("18 3 39 19 91\n38 10 8 77 320\n3 4 8 6 7")
 
                         #  18  3   39  19  91
