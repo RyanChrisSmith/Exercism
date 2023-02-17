@@ -1,7 +1,27 @@
-=begin
-Write your code for the 'Binary Search' exercise in this file. Make the tests in
-`binary_search_test.rb` pass.
+class BinarySearch
 
-To get started with TDD, see the `README.md` file in your
-`ruby/binary-search` directory.
-=end
+  def initialize(numbers)
+    @numbers = numbers
+  end
+
+  def search_for(num)
+    left_index = 0
+    right_index = @numbers.length - 1
+
+    while left_index <= right_index
+      mid_index = (left_index + right_index) / 2
+
+      current_number =@numbers[mid_index]
+
+      if current_number == num
+        return mid_index
+      elsif current_number < num
+        left_index = mid_index + 1
+      else
+        right_index = mid_index - 1
+      end
+    end
+
+    return nil
+  end
+end
