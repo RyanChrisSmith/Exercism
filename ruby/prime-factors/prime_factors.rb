@@ -14,3 +14,4 @@ class PrimeFactors
     factors  # Return the array of prime factors.
   end
 end
+
